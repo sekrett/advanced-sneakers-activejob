@@ -23,6 +23,10 @@ require 'active_job/queue_adapters/advanced_sneakers_adapter'
 
 ActiveSupport.on_load(:active_job) do
   ActiveJob::Base.include AdvancedSneakersActiveJob::ActiveJobPatch
+
+  require 'active_job/queue_adapters/sneakers_adapter'
+
+  ActiveJob::QueueAdapters::SneakersAdapter::JobWrapper.prepend(AdvancedSneakersActiveJob::JobWrapperPatch)
 end
 
 # Enforce definition of ActionMailer consumers
